@@ -22,7 +22,13 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
     <!-- === flag icons === -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.5.0/css/flag-icons.min.css" integrity="sha512-+WVTaUIzUw5LFzqIqXOT3JVAc5SrMuvHm230I9QAZa6s+QRk8NDPswbHo2miIZj3yiFyV9lAgzO1wVrjdoO4tw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.5.0/css/flag-icons.min.css"
+      integrity="sha512-+WVTaUIzUw5LFzqIqXOT3JVAc5SrMuvHm230I9QAZa6s+QRk8NDPswbHo2miIZj3yiFyV9lAgzO1wVrjdoO4tw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <!-- ============================ NAVBAR ============================= -->
@@ -70,23 +76,38 @@
           <!-- Mapa con numero de estudiantes -->
           <div class="map-card">
             <div class="map-card__header">
-              <span class="map-card__tag">// estudiantes.map — distribución global</span>
-              <span class="map-card__counter">total: <b id="counter-display">0</b></span>
+              <span class="map-card__tag"
+                >// estudiantes.map — distribución global</span
+              >
+              <span class="map-card__counter"
+                >total: <b id="counter-display">0</b></span
+              >
             </div>
-          
+
             <div class="map-card__body">
               <!-- Loader visible mientras carga el TopoJSON -->
               <div id="map-loader">
                 <span class="loader-text">cargando mapa</span>
               </div>
-          
-              <svg id="world-svg" viewBox="0 0 960 500" xmlns="http://www.w3.org/2000/svg">
 
-                <rect width="960" height="500" fill="transparent"/>
-                <rect width="960" height="500" fill="url(#grid)"/>
+              <svg
+                id="world-svg"
+                viewBox="0 0 960 500"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="960" height="500" fill="transparent" />
+                <rect width="960" height="500" fill="url(#grid)" />
                 <!-- Ecuador -->
-                <line x1="0" y1="250" x2="960" y2="250" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" stroke-dasharray="4 8"/>
-          
+                <line
+                  x1="0"
+                  y1="250"
+                  x2="960"
+                  y2="250"
+                  stroke="rgba(255,255,255,0.1)"
+                  stroke-width="0.5"
+                  stroke-dasharray="4 8"
+                />
+
                 <!-- D3 pinta los países aquí -->
                 <g id="countries-layer"></g>
                 <!-- JS pinta los puntos aquí -->
@@ -94,7 +115,7 @@
                 <g id="dots-layer"></g>
               </svg>
             </div>
-          
+
             <div class="map-card__footer">
               <div class="legend-dot"></div>
               <span class="legend-text">cada punto = 1 estudiante activo</span>
@@ -117,8 +138,7 @@
                 class="stat__value"
                 aria-label="3 estudiantes activos"
                 id="estudiantes-activos"
-              >
-              </p>
+              ></p>
               <p class="stat__desc">Personas que no dejaron de practicar.</p>
             </div>
           </article>
@@ -140,24 +160,32 @@
             <div class="stat__inner__text">
               <div class="stat__flags">
                 <span class="flag">
-                  <img src="https://flagcdn.com/w20/co.png" srcset="https://flagcdn.com/w40/co.png 2x"
-  width="20"
-  alt="Colombia">
-                </span>  <!-- Colombia -->
+                  <img
+                    src="https://flagcdn.com/w20/co.png"
+                    srcset="https://flagcdn.com/w40/co.png 2x"
+                    width="20"
+                    alt="Colombia"
+                  />
+                </span>
+                <!-- Colombia -->
                 <span class="flag">
                   <img
-  src="https://flagcdn.com/w20/pe.png"
-  srcset="https://flagcdn.com/w40/pe.png 2x"
-  width="20"
-  alt="Peru">
-                </span>  <!-- Perú -->
+                    src="https://flagcdn.com/w20/pe.png"
+                    srcset="https://flagcdn.com/w40/pe.png 2x"
+                    width="20"
+                    alt="Peru"
+                  />
+                </span>
+                <!-- Perú -->
                 <span class="flag">
                   <img
-  src="https://flagcdn.com/w20/us.png"
-  srcset="https://flagcdn.com/w40/us.png 2x"
-  width="20"
-  alt="United States">
-                </span>  <!-- USA -->
+                    src="https://flagcdn.com/w20/us.png"
+                    srcset="https://flagcdn.com/w40/us.png 2x"
+                    width="20"
+                    alt="United States"
+                  />
+                </span>
+                <!-- USA -->
               </div>
               <p class="stat__desc">
                 La comunidad crece. El movimiento se expande.
@@ -262,8 +290,9 @@
               </div>
             </div>
             <!-- cta -->
-            <button href="#unirse" class="cta-section__btn">Unirme al reto
-            <i class="ri-rocket-fill"></i>
+            <button href="#unirse" class="cta-section__btn">
+              Unirme al reto
+              <i class="ri-rocket-fill"></i>
             </button>
           </div>
 
@@ -325,53 +354,7 @@
                     >--color-surface</span
                   >);
                 </div>
-                <div>
-                  }<span
-                    class="challenge-preview__cursor"
-                    aria-hidden="true"
-                  ></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="challenge-preview__footer">
-              <p
-                style="
-                  font-family: var(--font-code);
-                  font-size: var(--text-mono);
-                  color: rgba(255, 255, 255, 0.25);
-                "
-              >
-                Institute for Data Science
-              </p>
-              <div
-                class="challenge-preview__social"
-                aria-label="Redes sociales"
-              >
-                <div
-                  class="challenge-preview__social-icon"
-                  role="button"
-                  tabindex="0"
-                  aria-label="Twitter"
-                >
-                  𝕏
-                </div>
-                <div
-                  class="challenge-preview__social-icon"
-                  role="button"
-                  tabindex="0"
-                  aria-label="LinkedIn"
-                >
-                  in
-                </div>
-                <div
-                  class="challenge-preview__social-icon"
-                  role="button"
-                  tabindex="0"
-                  aria-label="Facebook"
-                >
-                  f
-                </div>
+                <div>}</div>
               </div>
             </div>
           </div>
@@ -386,7 +369,8 @@
           <p class="footer__copy">
             <span>©2026</span> Frontend Club. Todos los derechos reservados.
           </p>
-          <p class="footer__copy u-mono">built_with: 
+          <p class="footer__copy u-mono">
+            built_with:
             <span>
               <i class="ri-heart-3-fill"></i>
             </span>
