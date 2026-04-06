@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Club</title>
+    <!-- ============================ GOOGLE FONTS ============================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ============================ REMIX ICONS ============================= -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- ============================ STYLES ============================= -->
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <!-- === librería d3 para mapa interactivo ===-->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+    <!-- === flag icons === -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.5.0/css/flag-icons.min.css"
+      integrity="sha512-+WVTaUIzUw5LFzqIqXOT3JVAc5SrMuvHm230I9QAZa6s+QRk8NDPswbHo2miIZj3yiFyV9lAgzO1wVrjdoO4tw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- ============================ NAVBAR ============================= -->
+    <header class="navbar" role="banner">
+      <div class="u-container">
+        <nav class="navbar__inner" aria-label="Navegación principal">
+          <a href="#" class="navbar__brand" aria-label="Frontend Club inicio">
+            <div class="navbar__logo" aria-hidden="true">
+              <img
+                class="navbar__logo__image"
+                src="/assets/images/front-end-club-logo.png"
+              />
+            </div>
+            <span class="navbar__wordmark">frontend club</span>
+          </a>
+
+          <ul class="navbar__nav" role="list">
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+
+          <button class="navbar__cta" role="button">Unirme</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ============================ HERO ============================= -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="u-container">
+        <div class="hero__inner">
+          <p class="hero__eyebrow" aria-label="Sección: comunidad activa">
+            #100daysOfCode
+          </p>
+
+          <h1 class="hero__title" id="hero-title">
+            Aprende haciendo.<br />
+            <span>&#60; Frontend Club &#47; &#62;</span>
+          </h1>
+
+          <p class="hero__subtitle">
+            Cada punto representa a un coder que completó un reto real.<br />
+            Te estamos esperando.
+          </p>
+
+          <!-- Mapa con numero de estudiantes -->
+          <div class="map-card">
+            <div class="map-card__header">
+              <span class="map-card__tag"
+                >// estudiantes.map — distribución global</span
+              >
+              <span class="map-card__counter"
+                >total: <b id="counter-display">0</b></span
+              >
+            </div>
+
+            <div class="map-card__body">
+              <!-- Loader visible mientras carga el TopoJSON -->
+              <div id="map-loader">
+                <span class="loader-text">cargando mapa</span>
+              </div>
+
+              <svg
+                id="world-svg"
+                viewBox="0 0 960 500"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="960" height="500" fill="transparent" />
+                <rect width="960" height="500" fill="url(#grid)" />
+                <!-- Ecuador -->
+                <line
+                  x1="0"
+                  y1="250"
+                  x2="960"
+                  y2="250"
+                  stroke="rgba(255,255,255,0.1)"
+                  stroke-width="0.5"
+                  stroke-dasharray="4 8"
+                />
+
+                <!-- D3 pinta los países aquí -->
+                <g id="countries-layer"></g>
+                <!-- JS pinta los puntos aquí -->
+                <g id="pulses-layer"></g>
+                <g id="dots-layer"></g>
+              </svg>
+            </div>
+
+            <div class="map-card__footer">
+              <div class="legend-dot"></div>
+              <span class="legend-text">cada punto = 1 estudiante activo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ STATS ============================= -->
+    <section class="stats" id="stats" aria-label="Estadísticas de la comunidad">
+      <div class="u-container">
+        <div class="stats__grid">
+          <article class="stat">
+            <span class="stat__icon">
+              <i class="ri-user-community-fill"></i>
+            </span>
+            <div class="stat__inner__text">
+              <p
+                class="stat__value"
+                aria-label="3 estudiantes activos"
+                id="estudiantes-activos"
+              ></p>
+              <p class="stat__desc">Personas que no dejaron de practicar.</p>
+            </div>
+          </article>
+
+          <article class="stat">
+            <span class="stat__icon">
+              <i class="ri-code-s-slash-line"></i>
+            </span>
+            <div class="stat__inner__text">
+              <p class="stat__value" aria-label="3 retos completados">3+</p>
+              <p class="stat__desc">Retos convertidos en proyectos reales</p>
+            </div>
+          </article>
+
+          <article class="stat">
+            <span class="stat__icon">
+              <i class="ri-earth-fill"></i>
+            </span>
+            <div class="stat__inner__text">
+              <div class="stat__flags">
+                <span class="flag">
+                  <img
+                    src="https://flagcdn.com/w20/co.png"
+                    srcset="https://flagcdn.com/w40/co.png 2x"
+                    width="20"
+                    alt="Colombia"
+                  />
+                </span>
+                <!-- Colombia -->
+                <span class="flag">
+                  <img
+                    src="https://flagcdn.com/w20/pe.png"
+                    srcset="https://flagcdn.com/w40/pe.png 2x"
+                    width="20"
+                    alt="Peru"
+                  />
+                </span>
+                <!-- Perú -->
+                <span class="flag">
+                  <img
+                    src="https://flagcdn.com/w20/us.png"
+                    srcset="https://flagcdn.com/w40/us.png 2x"
+                    width="20"
+                    alt="United States"
+                  />
+                </span>
+                <!-- USA -->
+              </div>
+              <p class="stat__desc">
+                La comunidad crece. El movimiento se expande.
+              </p>
+            </div>
+
+            <!--
+          <div class="stat__flags" aria-label="Banderas de países">
+            <span role="img" aria-label="Estados Unidos">🇺🇸</span>
+            <span role="img" aria-label="Colombia">🇨🇴</span>
+            <span role="img" aria-label="Francia">🇫🇷</span>
+          </div>-->
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ HOW IT WORKS ============================= -->
+    <section class="how" id="challenges" aria-labelledby="how-title">
+      <div class="u-container">
+        <header class="section-header">
+          <p class="section-header__tag u-mono">// cómo_funciona</p>
+          <h2 class="section-header__title" id="how-title">
+            ¿Cómo funciona Frontend Club?
+          </h2>
+          <p class="section-header__body">
+            Practicar todos los días no es motivación.<br />
+            <strong>Aquí es el sistema.</strong>
+          </p>
+        </header>
+
+        <div class="how__layout">
+          <!-- Steps -->
+          <div class="how__steps" role="list" aria-label="Pasos del proceso">
+            <!-- step 1 -->
+            <div
+              class="step step--active"
+              role="listitem"
+              tabindex="0"
+              aria-label="Paso 1: Elige un reto"
+            >
+              <div class="step__icon" aria-hidden="true">
+                <i class="ri-cursor-hand"></i>
+              </div>
+              <div class="step__content">
+                <p class="step__title">Elige un reto</p>
+                <p class="step__desc">
+                  Selecciona un reto según tu nivel y empieza hoy mismo.
+                </p>
+              </div>
+            </div>
+            <!-- step 2 -->
+            <div
+              class="step"
+              role="listitem"
+              tabindex="0"
+              aria-label="Paso 2: Practica"
+            >
+              <div class="step__icon" aria-hidden="true">
+                <i class="ri-terminal-box-line"></i>
+              </div>
+              <div class="step__content">
+                <p class="step__title">Practica</p>
+                <p class="step__desc">
+                  Soluciona el problema usando HTML, CSS, JavaScript, o lo que
+                  necesites.
+                </p>
+              </div>
+            </div>
+            <!-- step 3 -->
+            <div
+              class="step"
+              role="listitem"
+              tabindex="0"
+              aria-label="Paso 3: Envía"
+            >
+              <div class="step__icon" aria-hidden="true">
+                <i class="ri-mail-send-fill"></i>
+              </div>
+              <div class="step__content">
+                <p class="step__title">Envía</p>
+                <p class="step__desc">
+                  Sube tu proyecto, recibe feedback y mejora iterando.
+                </p>
+              </div>
+            </div>
+            <!-- step 4 -->
+            <div
+              class="step"
+              role="listitem"
+              tabindex="0"
+              aria-label="Paso 4: Gana"
+            >
+              <div class="step__icon" aria-hidden="true">
+                <i class="ri-medal-line"></i>
+              </div>
+              <div class="step__content">
+                <p class="step__title">Gana</p>
+                <p class="step__desc">
+                  Asegura tu cuadro en el club. Asegura tu progreso.
+                </p>
+              </div>
+            </div>
+            <!-- cta -->
+            <button href="#unirse" class="cta-section__btn">
+              Unirme al reto
+              <i class="ri-rocket-fill"></i>
+            </button>
+          </div>
+
+          <!-- Challenge Preview -->
+          <div class="challenge-preview" aria-label="Vista previa de un reto">
+            <div class="challenge-preview__header">
+              <div class="challenge-preview__dots" aria-hidden="true">
+                <div
+                  class="challenge-preview__dot challenge-preview__dot--red"
+                ></div>
+                <div
+                  class="challenge-preview__dot challenge-preview__dot--yellow"
+                ></div>
+                <div
+                  class="challenge-preview__dot challenge-preview__dot--green"
+                ></div>
+              </div>
+              <p class="challenge-preview__title">
+                reto-01 / profile-card.html
+              </p>
+            </div>
+
+            <div class="challenge-preview__body">
+              <span class="challenge-preview__badge">Nivel: Principiante</span>
+              <p class="challenge-preview__name">Harrietta Gregory</p>
+              <p class="challenge-preview__role">
+                // ethnographer & computational linguist
+              </p>
+
+              <div
+                class="challenge-preview__code"
+                role="presentation"
+                aria-label="Fragmento de código de ejemplo"
+              >
+                <div><span class="cm">/* Profile Card Challenge */</span></div>
+                <div><span class="kw">:root</span> {</div>
+                <div>
+                  &nbsp;&nbsp;<span class="fn">--color-primary</span>:
+                  <span class="str">#00e5a0</span>;
+                </div>
+                <div>
+                  &nbsp;&nbsp;<span class="fn">--font-body</span>:
+                  <span class="str">'Sora'</span>, sans-serif;
+                </div>
+                <div>}</div>
+                <div>&nbsp;</div>
+                <div><span class="kw">.card</span> {</div>
+                <div>
+                  &nbsp;&nbsp;<span class="fn">display</span>:
+                  <span class="str">flex</span>;
+                </div>
+                <div>
+                  &nbsp;&nbsp;<span class="fn">border-radius</span>:
+                  <span class="nu">14px</span>;
+                </div>
+                <div>
+                  &nbsp;&nbsp;<span class="fn">background</span>:
+                  <span class="fn">var</span>(<span class="str"
+                    >--color-surface</span
+                  >);
+                </div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FOOTER ============================= -->
+    <footer class="footer" role="contentinfo">
+      <div class="u-container">
+        <div class="footer__inner">
+          <p class="footer__copy">
+            <span>©2026</span> Frontend Club. Todos los derechos reservados.
+          </p>
+          <p class="footer__copy u-mono">
+            built_with:
+            <span>
+              <i class="ri-heart-3-fill"></i>
+            </span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================ SCRIPTS ============================= -->
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>
