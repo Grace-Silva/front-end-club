@@ -2,7 +2,7 @@
 const TOTAL_ESTUDIANTES = 38;
 
 const WIDTH = 960;
-const HEIGHT = 500;
+const HEIGHT = 540;
 const NS = "http://www.w3.org/2000/svg";
 
 // Proyección Natural Earth
