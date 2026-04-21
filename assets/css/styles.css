@@ -667,7 +667,7 @@ body {
        RESPONSIVE
     ============================================================ */
 
-@media (max-width: 1280px) {
+@media (max-width: 1024px) {
   .hero__subtitle {
     font-size: 1.12rem;
   }
@@ -743,18 +743,22 @@ body {
   .challenge-preview__body{
     padding: var(--space-sm) var(--space-md);
   }
-}
-
-@media (max-width: 600px) {
-  .u-container {
-    padding: 0 var(--space-md);
-  }
-  .hero {
-    padding: var(--space-xl) 0 var(--space-lg);
-  }
-  .cta-section {
-    padding: var(--space-xl) 0;
+  .footer__inner{
+    flex-direction: column;
   }
 }
 
-@media (max-width: 480px) {}
+@media (max-width: 480px) {
+  .navbar__content{
+    width: 64vw;
+  }
+   .hero{
+    padding: var(--space-xl) var(--space-lg);
+  }
+  .hero__title{
+    font-size: clamp(2.4rem, 6vw, 4.8rem);
+  }
+  .stats{
+    padding: var(--space-lg) 0;
+  }
+}
