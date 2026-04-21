@@ -162,3 +162,13 @@ initMap().catch((err) => {
 /* stats */
 let estudiantes__activos = document.getElementById("estudiantes-activos");
 estudiantes__activos.innerText = TOTAL_ESTUDIANTES + "+";
+
+
+/* menu contraíble */
+let menuBtn = document.getElementById("toggle-menu");
+let navbarContent = document.getElementById("navbar-content");
+
+function mostrarMenu(){
+  navbarContent.classList.toggle("visible");
+}
+menuBtn.addEventListener("click", mostrarMenu);
