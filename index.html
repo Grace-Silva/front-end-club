@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
     <!-- ============================ STYLES ============================= -->
-    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <!-- === librería d3 para mapa interactivo ===-->
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
@@ -39,25 +39,18 @@
             <div class="navbar__logo" aria-hidden="true">
               <img
                 class="navbar__logo__image"
-                src="/assets/images/front-end-club-logo.png"
+                src="./assets/images/front-end-club-logo.png"
               />
             </div>
             <span class="navbar__wordmark">frontend club</span>
           </a>
 
-          <div class="navbar__content" id="navbar-content">
-            <ul class="navbar__nav" role="list">
-              <li><a href="#" class="navbar__nav__link">Challenges</a></li>
-              <li><a href="#" class="navbar__nav__link">Recursos</a></li>
-              <li><a href="#" class="navbar__nav__link">Tienda</a></li>
-            </ul>
-            <!-- cta -->
-            <button class="navbar__cta" role="button">Unirme</button>
-          </div>
-          <!-- toggle menu -->
-          <button class="toggle__menu__icon" id="toggle-menu">
-            <i class="ri-menu-3-line"></i>
-          </button>
+          <ul class="navbar__nav" role="list">
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+
+          <button class="navbar__cta" role="button">Unirme</button>
         </nav>
       </div>
     </header>
@@ -338,15 +331,11 @@
                 <div><span class="kw">:root</span> {</div>
                 <div>
                   &nbsp;&nbsp;<span class="fn">--color-primary</span>:
-                  <span class="str">#37353E</span>;
+                  <span class="str">#00e5a0</span>;
                 </div>
                 <div>
                   &nbsp;&nbsp;<span class="fn">--font-body</span>:
                   <span class="str">'Sora'</span>, sans-serif;
-                </div>
-                <div>
-                  &nbsp;&nbsp;<span class="fn">--color-surface</span>:
-                  <span class="str">'#FCF8F8'</span>;
                 </div>
                 <div>}</div>
                 <div>&nbsp;</div>
@@ -405,6 +394,6 @@
     </footer>
 
     <!-- ============================ SCRIPTS ============================= -->
-    <script src="/assets/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
