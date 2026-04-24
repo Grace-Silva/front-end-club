@@ -5,6 +5,9 @@ const WIDTH = 960;
 const HEIGHT = 540;
 const NS = "http://www.w3.org/2000/svg";
 
+
+
+
 // Proyección Natural Earth
 const projection = d3
   .geoNaturalEarth1()
