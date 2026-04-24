@@ -2,8 +2,11 @@
 const TOTAL_ESTUDIANTES = 38;
 
 const WIDTH = 960;
-const HEIGHT = 500;
+const HEIGHT = 540;
 const NS = "http://www.w3.org/2000/svg";
+
+
+
 
 // Proyección Natural Earth
 const projection = d3
@@ -162,3 +165,13 @@ initMap().catch((err) => {
 /* stats */
 let estudiantes__activos = document.getElementById("estudiantes-activos");
 estudiantes__activos.innerText = TOTAL_ESTUDIANTES + "+";
+
+
+/* menu contraíble */
+let menuBtn = document.getElementById("toggle-menu");
+let navbarContent = document.getElementById("navbar-content");
+
+function mostrarMenu(){
+  navbarContent.classList.toggle("visible");
+}
+menuBtn.addEventListener("click", mostrarMenu);
